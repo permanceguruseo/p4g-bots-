@@ -5,7 +5,7 @@ services:
   - type: worker
     name: p4g-bot-fleet
     runtime: node
-    plan: starter            # $7/mo — stays awake 24/7 (free tier sleeps)
+    plan: free            # $7/mo — stays awake 24/7 (free tier sleeps)
     buildCommand: npm install && npx puppeteer browsers install chrome
     startCommand: node launcher.js
     envVars:
