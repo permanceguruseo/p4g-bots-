@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bal Gopal Squad · P4G SEO Dashboard 🦚</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFF8EC; --cream2:#FFFDF6; --card:#FFFFFF;
+  --ink:#4C4568; --sub:#968DA6; --faint:#C0B7CC;
+  --line:#F4EBDA; --line2:#EBDFC9;
+  --krishna:#6FA8DC; --krishna-d:#5B93CE; --krishna-soft:#E5F0FB;
+  --gold:#E0A93A; --gold-d:#C9962E; --gold-soft:#FBEFCE;
+  --butter:#F7DC8A; --butter-soft:#FDF6DC;
+  --peacock:#2FB0A0; --peacock-soft:#DDF4F0;
+  --lotus:#FF9CC0; --lotus-soft:#FFE8F1;
+  --tulsi:#83CE95; --tulsi-soft:#E3F5E7;
+  --go:#54C596; --warn:#E8A44C; --fail:#EF8A8A; --idle:#CEC5D8;
+  --accent:#6FA8DC; --accent-d:#5B93CE; --accent-soft:#E5F0FB;
+  --disp:'Baloo 2',cursive; --body:'Nunito',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--cream);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.55;font-weight:600;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 12% 8%,var(--butter-soft) 0,transparent 38%),radial-gradient(circle at 88% 5%,var(--krishna-soft) 0,transparent 34%),radial-gradient(circle at 78% 92%,var(--lotus-soft) 0,transparent 40%);background-attachment:fixed}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:var(--line2);border-radius:6px}::-webkit-scrollbar-track{background:transparent}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit;font-size:13.5px}
+
+.shell{display:grid;grid-template-columns:242px 1fr;min-height:100vh}
+
+/* nav */
+.nav{background:var(--cream2);border-right:2px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{padding:22px 22px 18px}
+.brand .logo{display:flex;align-items:center;gap:12px}
+.brand .mark{width:46px;height:46px;border-radius:16px;background:linear-gradient(140deg,var(--krishna),var(--gold));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px var(--krishna-soft)}
+.brand .name{font-family:var(--disp);font-weight:700;font-size:18px;color:var(--ink);line-height:1}
+.brand .tag{font-size:11px;color:var(--gold-d);font-weight:800;margin-top:3px}
+.navlist{padding:8px 12px;flex:1;overflow-y:auto}
+.navlist .lbl{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding:16px 12px 7px}
+.navitem{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:14px;color:var(--sub);font-weight:700;font-size:14px;transition:.16s;margin-bottom:3px}
+.navitem:hover{background:var(--cream);color:var(--ink)}
+.navitem.on{background:var(--krishna-soft);color:var(--krishna-d)}
+.navitem .ic{font-size:17px;width:20px;text-align:center}
+.navitem .badge{margin-left:auto;font-size:11px;font-weight:800;padding:1px 9px;border-radius:12px;background:var(--gold-soft);color:var(--gold-d)}
+.navfoot{padding:16px 20px;border-top:2px solid var(--line);font-size:12px;color:var(--sub);font-weight:800;display:flex;align-items:center;gap:9px}
+.hb{width:9px;height:9px;border-radius:50%;background:var(--go);box-shadow:0 0 0 4px var(--tulsi-soft)}
+.hb.off{background:var(--fail);box-shadow:0 0 0 4px var(--lotus-soft)}
+
+/* main */
+.main{display:flex;flex-direction:column;min-width:0}
+.topbar{display:flex;align-items:center;gap:16px;padding:20px 30px;position:sticky;top:0;z-index:20;background:rgba(255,248,236,.86);backdrop-filter:blur(8px);border-bottom:2px solid var(--line)}
+.topbar h1{font-family:var(--disp);font-size:24px;font-weight:700}
+.topbar .sub{color:var(--sub);font-size:13px;font-weight:700}
+.spacer{flex:1}
+.clock{font-size:13px;color:var(--sub);font-weight:800;text-align:right}
+.clock b{color:var(--ink)}
+.btn{background:var(--krishna);color:#fff;font-weight:800;font-size:13.5px;padding:11px 18px;border-radius:14px;transition:.16s;box-shadow:0 6px 16px var(--krishna-soft)}
+.btn:hover{background:var(--krishna-d);transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn.ghost{background:var(--card);color:var(--ink);border:2px solid var(--line2);box-shadow:none}
+.btn.ghost:hover{border-color:var(--krishna);color:var(--krishna-d)}
+.btn.sm{padding:7px 13px;font-size:12.5px;border-radius:11px}
+.btn.gold{background:var(--gold);box-shadow:0 6px 16px var(--gold-soft)}
+.btn.gold:hover{background:var(--gold-d)}
+
+.body{padding:26px 30px 70px;flex:1}
+.view{display:none;animation:pop .4s cubic-bezier(.3,1.4,.5,1)}
+.view.on{display:block}
+@keyframes pop{from{opacity:0;transform:scale(.98) translateY(8px)}to{opacity:1;transform:none}}
+
+/* telemetry */
+.telem{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px}
+.tcard{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:18px 20px;transition:.16s;position:relative;overflow:hidden}
+.tcard:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(111,168,220,.14)}
+.tcard .krow{display:flex;align-items:center;gap:8px}
+.tcard .emo{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.tcard .k{font-size:11.5px;font-weight:800;color:var(--sub);text-transform:uppercase;letter-spacing:.03em}
+.tcard .v{font-family:var(--disp);font-size:34px;font-weight:700;margin-top:8px;line-height:1}
+.tcard .d{font-size:12px;color:var(--faint);font-weight:700;margin-top:3px}
+.t-krishna .emo{background:var(--krishna-soft)}.t-krishna .v{color:var(--krishna)}
+.t-gold .emo{background:var(--gold-soft)}.t-gold .v{color:var(--gold)}
+.t-peacock .emo{background:var(--peacock-soft)}.t-peacock .v{color:var(--peacock)}
+.t-lotus .emo{background:var(--lotus-soft)}.t-lotus .v{color:var(--lotus)}
+.t-tulsi .emo{background:var(--tulsi-soft)}.t-tulsi .v{color:var(--tulsi)}
+
+/* section */
+.sect{display:flex;align-items:center;gap:14px;margin:30px 0 16px}
+.sect h2{font-family:var(--disp);font-size:20px;font-weight:700}
+.sect .rule{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 10px,transparent 10px 16px);border-radius:2px}
+.sect .meta{font-size:12.5px;color:var(--sub);font-weight:800}
+
+/* ── BAL GOPAL FLEET (signature) ── */
+.fleet{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.buddy{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:16px 14px 15px;text-align:center;transition:.18s;cursor:pointer;position:relative}
+.buddy:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(224,169,58,.16);border-color:var(--gold-soft)}
+.buddy .mascot{width:94px;height:104px;margin:0 auto -2px;transition:.2s}
+.buddy:hover .mascot{transform:scale(1.05)}
+.buddy .nm{font-family:var(--disp);font-weight:700;font-size:16px;line-height:1.1}
+.buddy .role{font-size:11px;color:var(--sub);font-weight:800;margin-top:1px}
+.buddy .status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;padding:4px 11px;border-radius:20px;margin-top:8px}
+.st-run{background:var(--tulsi-soft);color:#399e6f}
+.st-idle{background:#F4F0F7;color:var(--sub)}
+.st-warn{background:var(--gold-soft);color:var(--gold-d)}
+.st-off{background:var(--lotus-soft);color:#e06a6a}
+.buddy .stats{display:flex;justify-content:center;gap:18px;margin-top:12px;padding-top:12px;border-top:2px dashed var(--line)}
+.buddy .stat .n{font-family:var(--disp);font-size:18px;font-weight:700}
+.buddy .stat .t{font-size:10.5px;color:var(--faint);font-weight:800}
+.zzz{position:absolute;top:12px;right:18px;font-size:13px;color:var(--krishna);animation:float 2.4s infinite;font-weight:800}
+@keyframes float{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-6px);opacity:1}}
+.bounce{animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(-1.5deg)}}
+
+/* panels + tables */
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+.panel{background:var(--card);border:2px solid var(--line);border-radius:22px;overflow:hidden}
+.panel .ph{display:flex;align-items:center;gap:11px;padding:16px 20px;border-bottom:2px solid var(--line)}
+.panel .ph h3{font-family:var(--disp);font-size:17px;font-weight:700}
+.panel .ph .emo{font-size:18px}
+.panel .ph .meta{margin-left:auto;font-size:12px;color:var(--sub);font-weight:800}
+table{width:100%;border-collapse:collapse}
+th{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);text-align:left;padding:12px 20px;border-bottom:2px solid var(--line)}
+td{padding:13px 20px;border-bottom:1px solid var(--line);font-size:13.5px;font-weight:700}
+tr:last-child td{border-bottom:none}
+tbody tr{transition:.12s}tbody tr:hover{background:var(--cream)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:4px 11px;border-radius:20px}
+.pill.go{background:var(--tulsi-soft);color:#399e6f}
+.pill.warn{background:var(--gold-soft);color:var(--gold-d)}
+.pill.fail{background:var(--lotus-soft);color:#e06a6a}
+.pill.run{background:var(--krishna-soft);color:var(--krishna-d)}
+.pill.idle{background:#F4F0F7;color:var(--sub)}
+.linkcell a{color:var(--krishna-d);font-weight:800;border-bottom:2px dotted var(--line2)}
+.linkcell a:hover{border-color:var(--krishna)}
+.miniava{width:28px;height:28px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;margin-right:8px;vertical-align:middle}
+
+/* feed */
+.feed{max-height:430px;overflow-y:auto}
+.fitem{display:flex;gap:12px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--line)}
+.fitem:last-child{border:none}
+.fitem .fm{width:44px;height:48px;flex-shrink:0}
+.fitem .ft{flex:1;min-width:0}
+.fitem .ft .m{font-size:13px;font-weight:800}
+.fitem .ft .tm{font-size:11.5px;color:var(--faint);font-weight:800;margin-top:1px}
+
+/* empty */
+.empty{text-align:center;padding:48px 20px;color:var(--faint)}
+.empty .et{font-family:var(--disp);color:var(--sub);font-size:18px;font-weight:700;margin-bottom:4px}
+.empty .ed{font-weight:700}
+
+/* toolbar */
+.toolbar{display:flex;align-items:center;gap:11px;margin-bottom:18px;flex-wrap:wrap}
+.search{flex:1;min-width:180px;background:var(--card);border:2px solid var(--line2);border-radius:14px;padding:11px 15px;color:var(--ink);font-weight:700}
+.search:focus{outline:none;border-color:var(--krishna)}
+.filter{background:var(--card);border:2px solid var(--line2);border-radius:14px;padding:11px 14px;color:var(--sub);font-weight:800}
+.filter:focus{outline:none;border-color:var(--krishna)}
+
+/* client cards */
+.clients{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:16px}
+.ccard{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:18px;transition:.16s}
+.ccard:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(111,168,220,.14)}
+.ccard .ct{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.ccard .cav{width:46px;height:46px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:700;font-size:18px;color:#fff}
+.ccard .cn{font-family:var(--disp);font-weight:700;font-size:16px}
+.ccard .cu{font-size:12px;color:var(--faint);font-weight:800}
+.ccard .crow{display:flex;justify-content:space-between;padding:8px 0;font-size:13px;font-weight:800;border-top:1px solid var(--line)}
+.ccard .crow .l{color:var(--sub)}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(76,69,104,.34);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.overlay.on{display:flex;animation:fade .2s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.modal{background:var(--card);border-radius:26px;width:100%;max-width:530px;max-height:88vh;overflow-y:auto;box-shadow:0 30px 80px rgba(76,69,104,.3);animation:pop .35s cubic-bezier(.3,1.4,.5,1)}
+.modal .mh{display:flex;align-items:center;gap:12px;padding:22px 24px 18px}
+.modal .mh .mi{width:46px;height:46px;border-radius:15px;background:var(--krishna-soft);display:flex;align-items:center;justify-content:center;font-size:22px}
+.modal .mh h3{font-family:var(--disp);font-size:20px;font-weight:700}
+.modal .mh .x{margin-left:auto;color:var(--sub);font-size:22px;width:34px;height:34px;border-radius:11px}
+.modal .mh .x:hover{background:var(--cream)}
+.modal .mb{padding:4px 24px 8px}
+.field{margin-bottom:15px}
+.field label{display:block;font-size:12px;font-weight:800;color:var(--sub);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;background:var(--cream);border:2px solid var(--line2);border-radius:13px;padding:11px 14px;color:var(--ink);font-weight:700}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--krishna);background:#fff}
+.field .hint{font-size:11.5px;color:var(--faint);font-weight:700;margin-top:4px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.mf{display:flex;gap:11px;padding:18px 24px 22px}
+.mf .btn{flex:1;justify-content:center;text-align:center}
+
+.note{background:var(--krishna-soft);border:2px solid #D9E8F8;border-radius:16px;padding:14px 16px;font-size:13px;font-weight:700;color:#4d6b90;margin-bottom:18px;display:flex;gap:10px;align-items:flex-start}
+.note .ni{font-size:18px}
+.note b{color:var(--krishna-d)}
+@media(max-width:720px){.shell{grid-template-columns:1fr}.nav{display:none}.frow{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="nav">
+    <div class="brand"><div class="logo">
+      <div class="mark"><svg width="30" height="30" viewBox="0 0 40 40"><path d="M28 12 Q34 6 37 2" stroke="#2FB0A0" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M37 0 C33 2 33 8 37 10 C41 8 41 2 37 0Z" fill="#2FB0A0"/><ellipse cx="37" cy="4.5" rx="2.2" ry="3.4" fill="#5B93CE"/><circle cx="37" cy="5" r="1.2" fill="#E0A93A"/><circle cx="20" cy="24" r="13" fill="#fff"/><circle cx="15" cy="24" r="2.6" fill="#5B93CE"/><circle cx="25" cy="24" r="2.6" fill="#5B93CE"/><path d="M16 29 Q20 33 24 29" stroke="#FF9CC0" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></div>
+      <div><div class="name">Bal Gopal Squad</div><div class="tag">Radhe Radhe 🦚</div></div>
+    </div></div>
+    <nav class="navlist">
+      <div class="lbl">Vrindavan</div>
+      <a class="navitem on" data-view="overview"><span class="ic">🏠</span> Overview</a>
+      <a class="navitem" data-view="queue"><span class="ic">📋</span> Task Queue <span class="badge" id="nav-queue" style="display:none"></span></a>
+      <a class="navitem" data-view="alerts"><span class="ic">🙏</span> Needs Help <span class="badge" id="nav-alerts" style="display:none"></span></a>
+      <a class="navitem" data-view="backlinks"><span class="ic">🔗</span> Backlinks</a>
+      <div class="lbl">Manage</div>
+      <a class="navitem" data-view="clients"><span class="ic">💼</span> Clients</a>
+      <a class="navitem" data-view="sites"><span class="ic">🗺️</span> Target Sites</a>
+      <a class="navitem" data-view="settings"><span class="ic">⚙️</span> Settings</a>
+    </nav>
+    <div class="navfoot"><span class="hb" id="conn-dot"></span><span id="conn-txt">Connecting…</span></div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div><h1 id="view-title">Radhe Radhe! 🦚</h1><div class="sub" id="view-sub">Aapki Bal Gopal squad aaj kaisा kaam kar rahi hai</div></div>
+      <div class="spacer"></div>
+      <div class="clock" id="clock"></div>
+      <button class="btn gold" onclick="openClient()">＋ Add Client</button>
+    </div>
+
+    <div class="body">
+      <section class="view on" id="v-overview">
+        <div class="telem" id="telem"></div>
+        <div class="sect"><h2>Bal Gopal Squad</h2><div class="rule"></div><span class="meta" id="fleet-meta"></span></div>
+        <div class="fleet" id="fleet"></div>
+        <div class="grid2" style="margin-top:26px">
+          <div class="panel"><div class="ph"><span class="emo">🪷</span><h3>Fresh Activity</h3><span class="meta" id="feed-meta"></span></div><div class="feed" id="feed"></div></div>
+          <div class="panel"><div class="ph"><span class="emo">🙏</span><h3>Madad Chahiye</h3><span class="meta" id="att-meta"></span></div><div class="feed" id="attention"></div></div>
+        </div>
+      </section>
+
+      <section class="view" id="v-queue">
+        <div class="toolbar"><input class="search" id="q-search" placeholder="Search tasks…" oninput="renderQueue()"><select class="filter" id="q-status" onchange="renderQueue()"><option value="">All statuses</option><option>Pending</option><option>Running</option><option>Completed</option><option>Failed</option></select></div>
+        <div class="panel"><table><thead><tr><th>Client</th><th>Gopal</th><th>Target</th><th>Status</th><th>Tries</th><th>Updated</th></tr></thead><tbody id="queue-body"></tbody></table></div>
+      </section>
+
+      <section class="view" id="v-alerts">
+        <div class="note"><span class="ni">🙏</span><div>Koi gopal haath uthata hai jab usse koi cheez akele nahi hoti — ek tricky CAPTCHA, OTP jo padh nahi paaya, ya anjaan form. <b>Madad kar do</b> aur woh khushi khushi kaam wapas uthा lega!</div></div>
+        <div class="panel"><table><thead><tr><th>Gopal</th><th>Site</th><th>Kya hua</th><th>Kab</th><th></th></tr></thead><tbody id="alerts-body"></tbody></table></div>
+      </section>
+
+      <section class="view" id="v-backlinks">
+        <div class="toolbar"><input class="search" id="b-search" placeholder="Search backlinks…" oninput="renderBacklinks()"><select class="filter" id="b-bot" onchange="renderBacklinks()"><option value="">All gopals</option></select><select class="filter" id="b-status" onchange="renderBacklinks()"><option value="">All statuses</option><option>Verified Live</option><option>Completed</option><option>Not Found</option></select></div>
+        <div class="panel"><table><thead><tr><th>Client</th><th>Gopal</th><th>Site</th><th>Live URL</th><th>Type</th><th>Status</th><th>When</th></tr></thead><tbody id="backlinks-body"></tbody></table></div>
+      </section>
+
+      <section class="view" id="v-clients">
+        <div class="toolbar"><input class="search" id="c-search" placeholder="Search clients…" oninput="renderClients()"><button class="btn gold" onclick="openClient()">＋ Add Client</button></div>
+        <div class="clients" id="clients"></div>
+      </section>
+
+      <section class="view" id="v-sites">
+        <div class="note"><span class="ni">🗺️</span><div>Har gopal ke paas apni pasandeeda jagah hai submit karne ke liye — sab verified & safe. Ek gopal chuno uski jagah dekhne ke liye!</div></div>
+        <div class="toolbar"><select class="filter" id="s-bot" onchange="renderSites()" style="min-width:230px"></select><div class="spacer"></div><button class="btn ghost sm" onclick="alert('Site editor — wired to /api/&lt;bot&gt;Sites')">＋ Add Site</button></div>
+        <div class="panel"><table><thead><tr><th>Site</th><th>Signup URL</th><th>DA</th><th>Walls</th><th>Status</th></tr></thead><tbody id="sites-body"></tbody></table></div>
+      </section>
+
+      <section class="view" id="v-settings">
+        <div class="note"><span class="ni">🔐</span><div>Aapki keys aapke apne server pe safely rehti hain — ek baar paste karo, gopal peeche se chup-chaap use karte rehte hain.</div></div>
+        <div class="panel" style="max-width:640px"><div class="ph"><span class="emo">🔑</span><h3>Keys & Integrations</h3></div>
+          <div class="mb" style="padding:18px 24px 8px">
+            <div class="field"><label>Anthropic API Key · content magic ✨</label><input type="password" placeholder="sk-ant-••••••••" id="k-anthropic"><div class="hint">Radha, Gopal, Balram & Shankh ke likhne ke liye.</div></div>
+            <div class="field"><label>2Captcha API Key · puzzle solver 🧩</label><input type="password" placeholder="••••••••" id="k-captcha"></div>
+            <div class="frow"><div class="field"><label>IMAP Host · email OTP 📬</label><input placeholder="imap.gmail.com" id="k-imaphost"></div><div class="field"><label>IMAP Inbox</label><input placeholder="otp@per4mance.guru" id="k-imapuser"></div></div>
+          </div>
+          <div class="mf" style="border-top:2px solid var(--line)"><button class="btn" style="flex:1;justify-content:center" onclick="saveKeys()">Save keys 💾</button></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="clientModal"><div class="modal">
+  <div class="mh"><div class="mi">💼</div><h3>Add a Client</h3><button class="x" onclick="closeClient()">×</button></div>
+  <div class="mb">
+    <div class="field"><label>Business name</label><input id="f-name" placeholder="Acme Interiors"></div>
+    <div class="frow"><div class="field"><label>Website</label><input id="f-website" placeholder="https://acme.com"></div><div class="field"><label>Phone</label><input id="f-phone" placeholder="+91 98••• •••••"></div></div>
+    <div class="frow"><div class="field"><label>Email</label><input id="f-email" placeholder="hello@acme.com"></div><div class="field"><label>Category</label><input id="f-category" placeholder="Interior design"></div></div>
+    <div class="field"><label>Address</label><input id="f-address" placeholder="City, area, pincode"></div>
+    <div class="field"><label>Target keywords</label><input id="f-keywords" placeholder="interior designer delhi, modular kitchen"></div>
+    <div class="field"><label>Short description</label><textarea id="f-desc" rows="2" placeholder="Business ke baare mein ek line — listings & articles mein use hogi."></textarea></div>
+  </div>
+  <div class="mf"><button class="btn ghost" onclick="closeClient()">Cancel</button><button class="btn" onclick="saveClient()">Add client 🦚</button></div>
+</div></div>
+
+<script>
+const API = location.origin.startsWith('http') ? location.origin : '';
+let LIVE=false;
+
+// each gopal: key(botType), name, role(function), skin tone, accessory badge
+const BOTS=[
+  {key:'directory',   name:'Kanha',    role:'Directory & Listings', skin:'#A9CFEC', badge:'🪈'},
+  {key:'article',     name:'Radha',    role:'Article Submission',   skin:'#FFDCBC', badge:'🪷'},
+  {key:'rss',         name:'Mor',      role:'RSS Feeds',            skin:'#B9E7DF', badge:'🦚'},
+  {key:'microblog',   name:'Gopal',    role:'Micro Blogging',       skin:'#A9CFEC', badge:'🧈'},
+  {key:'web2',        name:'Balram',   role:'Web 2.0',              skin:'#FBE7CE', badge:'🌿'},
+  {key:'guestpost',   name:'Gopi',     role:'Guest Posting',        skin:'#FFD6C0', badge:'🌸'},
+  {key:'pptpdf',      name:'Sudama',   role:'PPT / PDF',            skin:'#F0D6BA', badge:'📜'},
+  {key:'image',       name:'Kamal',    role:'Image Submission',     skin:'#FFCFE0', badge:'🎨'},
+  {key:'classified',  name:'Madhav',   role:'Classifieds',          skin:'#A9CFEC', badge:'🏷'},
+  {key:'pressrelease',name:'Shankh',   role:'Press Release',        skin:'#FBE7CE', badge:'🐚'},
+  {key:'profile',     name:'Nandlala', role:'Profiles',             skin:'#A9CFEC', badge:'🪶'},
+];
+const cavColors=['#6FA8DC','#E0A93A','#2FB0A0','#FF9CC0','#83CE95','#F7DC8A'];
+
+// ── cute Bal Gopal mascot with mor-pankh, curls, tilak, blush ──
+function mascot(skin, badge, mood, size=94){
+  const dark='#4C4568', hair='#2E2740';
+  let eyes, mouth, extra='';
+  if(mood==='sleepy'){
+    eyes=`<path d="M22 44 Q28 49 34 44" stroke="${dark}" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M38 44 Q44 49 50 44" stroke="${dark}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+    mouth=`<circle cx="36" cy="54" r="2.3" fill="${dark}"/>`;
+  }else if(mood==='worry'){
+    eyes=`<circle cx="28" cy="45" r="3.8" fill="${dark}"/><circle cx="44" cy="45" r="3.8" fill="${dark}"/><path d="M22 39 L31 41" stroke="${dark}" stroke-width="2" stroke-linecap="round"/><path d="M50 39 L41 41" stroke="${dark}" stroke-width="2" stroke-linecap="round"/>`;
+    mouth=`<path d="M31 55 Q36 51 41 55" stroke="${dark}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+  }else if(mood==='sad'){
+    eyes=`<circle cx="28" cy="46" r="3.8" fill="${dark}"/><circle cx="44" cy="46" r="3.8" fill="${dark}"/><circle cx="29.6" cy="47.6" r="1.2" fill="#fff"/><circle cx="45.6" cy="47.6" r="1.2" fill="#fff"/>`;
+    mouth=`<path d="M31 56 Q36 52 41 56" stroke="${dark}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+    extra=`<path d="M50 47 q2 4 0 6" stroke="#6FA8DC" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+  }else{ // happy
+    eyes=`<circle cx="28" cy="45" r="4.2" fill="${dark}"/><circle cx="44" cy="45" r="4.2" fill="${dark}"/><circle cx="29.8" cy="43.2" r="1.4" fill="#fff"/><circle cx="45.8" cy="43.2" r="1.4" fill="#fff"/>`;
+    mouth=`<path d="M30 53 Q36 59 42 53" stroke="${dark}" stroke-width="2.6" fill="none" stroke-linecap="round"/>`;
+  }
+  return `<svg class="mascot" width="${size}" height="${Math.round(size*1.1)}" viewBox="0 -12 72 82" xmlns="http://www.w3.org/2000/svg">
+    <!-- mor pankh (peacock feather) -->
+    <path d="M46 24 Q57 12 61 1" stroke="#2FB0A0" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M61 -6 C55 -2 55 8 61 11 C67 8 67 -2 61 -6 Z" fill="#2FB0A0"/>
+    <ellipse cx="61" cy="2.5" rx="3.8" ry="6" fill="#5B93CE"/>
+    <ellipse cx="61" cy="4" rx="2.1" ry="3.2" fill="#E0A93A"/>
+    <circle cx="61" cy="4" r="1.4" fill="#3A2E4A"/>
+    <!-- shoulders / pitambar -->
+    <ellipse cx="36" cy="72" rx="25" ry="14" fill="#F5CE63"/>
+    <!-- curls -->
+    <g fill="${hair}"><circle cx="18" cy="34" r="6.5"/><circle cx="25" cy="25" r="7"/><circle cx="36" cy="22" r="7.5"/><circle cx="47" cy="25" r="7"/><circle cx="54" cy="34" r="6.5"/><circle cx="15" cy="44" r="5.5"/><circle cx="57" cy="44" r="5.5"/></g>
+    <!-- face -->
+    <circle cx="36" cy="46" r="21" fill="${skin}"/>
+    <!-- tilak -->
+    <path d="M33 34 Q36 41 39 34" fill="none" stroke="#E0A93A" stroke-width="2" stroke-linecap="round"/>
+    ${eyes}
+    <circle cx="22" cy="52" r="3.1" fill="#FF9CC0" opacity="0.5"/><circle cx="50" cy="52" r="3.1" fill="#FF9CC0" opacity="0.5"/>
+    ${mouth}${extra}
+    <!-- accessory badge -->
+    <circle cx="53" cy="60" r="10" fill="#fff" stroke="${skin}" stroke-width="2"/><text x="53" y="64" font-size="11" text-anchor="middle">${badge}</text>
+  </svg>`;
+}
+
+const state={clients:[],tasks:[],subs:[],alerts:[],botStatus:{}};
+function demo(){
+  const now=Date.now();
+  state.clients=[{id:'c1',name:'JJ Valaya',website:'jjvalaya.com',category:'Fashion'},{id:'c2',name:'Hide & Leather',website:'hideandleather.ae',category:'Accessories'},{id:'c3',name:'GD Goenka',website:'gdgoenka.com',category:'Education'}];
+  state.tasks=Array.from({length:14},(_,i)=>({id:'t'+i,clientId:'c'+(1+i%3),botType:BOTS[i%11].key,site:['Brownbook','SlideShare','Medium','Tumblr','OpenPR','Feedage'][i%6],status:['Completed','Running','Pending','Completed','Failed'][i%5],attempts:1+i%3,updatedAt:new Date(now-i*7e5).toISOString()}));
+  state.subs=Array.from({length:10},(_,i)=>({id:'s'+i,clientId:'c'+(1+i%3),botType:BOTS[i%6].key,site:['Brownbook','SlideShare','Medium','Issuu','OpenPR','Flickr'][i%6],profileUrl:'https://'+['brownbook.net','slideshare.net','medium.com'][i%3]+'/p/'+(1000+i),status:i%4===0?'Verified Live':'Completed',doFollow:i%2===0,date:new Date(now-i*9e5).toISOString()}));
+  state.alerts=[{id:'a1',botType:'directory',site:'Storeboard',reason:'CAPTCHA bahut tricky thi',createdAt:new Date(now-12e5).toISOString()},{id:'a2',botType:'classified',site:'Locanto',reason:'OTP email time pe nahi aaya',createdAt:new Date(now-30e5).toISOString()}];
+  state.botStatus={directory:'running',article:'running',classified:'warn',rss:'idle',microblog:'idle',web2:'idle',guestpost:'idle',pptpdf:'running',image:'idle',pressrelease:'idle',profile:'idle'};
+}
+async function pull(){
+  try{const q=p=>fetch(API+p).then(r=>{if(!r.ok)throw 0;return r.json()});
+    const [c,t,s,a]=await Promise.all([q('/api/clients'),q('/api/tasks'),q('/api/submissions'),q('/api/alerts')]);
+    state.clients=c||[];state.tasks=t||[];state.subs=s||[];state.alerts=(a||[]).filter(x=>x.status!=='resolved');LIVE=true;
+  }catch(e){LIVE=false;demo();}
+  computeStatus();renderAll();setConn();
+}
+function computeStatus(){if(!LIVE)return;const s={};BOTS.forEach(b=>s[b.key]='idle');state.tasks.forEach(t=>{if(t.status==='Running')s[t.botType]='running'});state.alerts.forEach(a=>{if(s[a.botType]!=='running')s[a.botType]='warn'});state.botStatus=s;}
+
+const clientName=id=>(state.clients.find(c=>c.id===id)||{}).name||'—';
+const fmtTime=iso=>{const m=Math.floor((Date.now()-new Date(iso))/60000);return m<1?'abhi':m<60?m+'m pehle':Math.floor(m/60)+'h pehle';};
+const initials=n=>n.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+const moodOf=st=>({running:'happy',idle:'sleepy',warn:'worry',off:'sad'}[st]||'sleepy');
+
+function renderAll(){renderTelem();renderFleet();renderFeed();renderAttention();renderQueue();renderAlerts();renderBacklinks();renderClients();renderSites();renderBadges();}
+
+function renderTelem(){
+  const t=state.tasks,s=state.subs;
+  const running=t.filter(x=>x.status==='Running').length;
+  const today=s.filter(x=>new Date(x.date).toDateString()===new Date().toDateString()).length;
+  const done=t.filter(x=>x.status==='Completed').length,fail=t.filter(x=>x.status==='Failed').length;
+  const rate=done+fail?Math.round(done/(done+fail)*100):100;
+  const cards=[
+    {k:'Gopal Working',v:running,d:'abhi',c:'t-krishna',e:'🪈'},
+    {k:'Links Today',v:today,d:'jai ho! 🎉',c:'t-gold',e:'🔗'},
+    {k:'Madad Chahiye',v:state.alerts.length,d:state.alerts.length?'haath do':'sab khush!',c:'t-lotus',e:'🙏'},
+    {k:'Success Rate',v:rate+'%',d:done+' done · '+fail+' oops',c:'t-peacock',e:'⭐'},
+    {k:'Clients',v:state.clients.length,d:'squad mein',c:'t-tulsi',e:'💼'},
+  ];
+  document.getElementById('telem').innerHTML=cards.map(c=>`<div class="tcard ${c.c}"><div class="krow"><div class="emo">${c.e}</div><div class="k">${c.k}</div></div><div class="v">${c.v}</div><div class="d">${c.d}</div></div>`).join('');
+}
+function renderFleet(){
+  document.getElementById('fleet').innerHTML=BOTS.map(b=>{
+    const st=state.botStatus[b.key]||'idle',mood=moodOf(st);
+    const cls={running:'st-run',idle:'st-idle',warn:'st-warn',off:'st-off'}[st];
+    const lbl={running:'Kaam pe',idle:'Vishram',warn:'Madad',off:'Udaas'}[st];
+    const dot={running:'🟢',idle:'😴',warn:'🙏',off:'🥺'}[st];
+    const done=state.subs.filter(s=>s.botType===b.key).length;
+    const pend=state.tasks.filter(t=>t.botType===b.key&&t.status==='Pending').length;
+    const zzz=st==='idle'?'<div class="zzz">z z</div>':'';
+    const anim=st==='running'?'bounce':'';
+    return `<div class="buddy" onclick="goBot('${b.key}')">${zzz}<div class="${anim}">${mascot(b.skin,b.badge,mood)}</div><div class="nm">${b.name}</div><div class="role">${b.role}</div><div class="status ${cls}">${dot} ${lbl}</div><div class="stats"><div class="stat"><div class="n" style="color:${b.skin.replace('#','#')}">${done}</div><div class="t">links</div></div><div class="stat"><div class="n">${pend}</div><div class="t">queued</div></div></div></div>`;
+  }).join('');
+  document.getElementById('fleet-meta').textContent=`${BOTS.filter(b=>state.botStatus[b.key]==='running').length} kaam pe · ${BOTS.length} gopal`;
+}
+function renderFeed(){
+  const items=[...state.subs].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,12);
+  const el=document.getElementById('feed');
+  document.getElementById('feed-meta').textContent=items.length?'latest':'';
+  if(!items.length){el.innerHTML=emptyBox('🪷','Abhi koi activity nahi','Gopal apni jeet yahan dikhायenge!');return;}
+  el.innerHTML=items.map(s=>{const b=BOTS.find(x=>x.key===s.botType)||{skin:'#ccc',badge:'•',name:s.botType};
+    return `<div class="fitem"><div class="fm">${mascot(b.skin,b.badge,'happy',44)}</div><div class="ft"><div class="m">${clientName(s.clientId)} → ${s.site} <span class="pill ${s.status==='Verified Live'?'go':'run'}">${s.status}</span></div><div class="tm">${b.name} · ${fmtTime(s.date)}</div></div></div>`;
+  }).join('');
+}
+function renderAttention(){
+  const el=document.getElementById('attention');
+  document.getElementById('att-meta').textContent=state.alerts.length?state.alerts.length+' waiting':'sab khush 🟢';
+  if(!state.alerts.length){el.innerHTML=emptyBox('🎈','Sab khush hain!','Kisi gopal ko madad nahi chahiye.');return;}
+  el.innerHTML=state.alerts.map(a=>{const b=BOTS.find(x=>x.key===a.botType)||{skin:'#F7DC8A',badge:'🙏',name:a.botType};
+    return `<div class="fitem"><div class="fm">${mascot(b.skin,b.badge,'worry',44)}</div><div class="ft"><div class="m">${b.name} · <b>${a.site}</b></div><div class="tm">${a.reason} · ${fmtTime(a.createdAt)}</div></div><button class="btn ghost sm" onclick="resolveAlert('${a.id}')">Madad 🙏</button></div>`;
+  }).join('');
+}
+function renderBadges(){
+  const pend=state.tasks.filter(t=>t.status==='Pending').length;
+  const qb=document.getElementById('nav-queue'),ab=document.getElementById('nav-alerts');
+  if(pend){qb.style.display='';qb.textContent=pend;qb.style.background='var(--krishna-soft)';qb.style.color='var(--krishna-d)';}else qb.style.display='none';
+  if(state.alerts.length){ab.style.display='';ab.textContent=state.alerts.length;}else ab.style.display='none';
+}
+function renderQueue(){
+  const s=(document.getElementById('q-search').value||'').toLowerCase(),st=document.getElementById('q-status').value;
+  let rows=state.tasks.filter(t=>{const bn=(BOTS.find(b=>b.key===t.botType)||{}).name||t.botType;return(!st||t.status===st)&&(!s||clientName(t.clientId).toLowerCase().includes(s)||bn.toLowerCase().includes(s));});
+  rows.sort((a,b)=>new Date(b.updatedAt||0)-new Date(a.updatedAt||0));
+  const body=document.getElementById('queue-body');
+  if(!rows.length){body.innerHTML=`<tr><td colspan="6">${emptyRow('Koi task nahi')}</td></tr>`;return;}
+  body.innerHTML=rows.map(t=>{const b=BOTS.find(x=>x.key===t.botType)||{badge:'•',name:t.botType,skin:'#ccc'};
+    const p={Completed:'go',Running:'run',Pending:'idle',Failed:'fail'}[t.status]||'idle';
+    return `<tr><td>${clientName(t.clientId)}</td><td><span class="miniava" style="background:${b.skin}44">${b.badge}</span>${b.name}</td><td>${t.site||'—'}</td><td><span class="pill ${p}">${t.status}</span></td><td>${t.attempts||1}</td><td style="color:var(--faint)">${t.updatedAt?fmtTime(t.updatedAt):'—'}</td></tr>`;
+  }).join('');
+}
+function renderAlerts(){
+  const body=document.getElementById('alerts-body');
+  if(!state.alerts.length){body.innerHTML=`<tr><td colspan="5">${emptyRow('Har gopal khush hai — koi madad nahi chahiye 🟢')}</td></tr>`;return;}
+  body.innerHTML=state.alerts.map(a=>{const b=BOTS.find(x=>x.key===a.botType)||{badge:'🙏',name:a.botType,skin:'#F7DC8A'};
+    return `<tr><td><span class="miniava" style="background:${b.skin}44">${b.badge}</span>${b.name}</td><td>${a.site||'—'}</td><td>${a.reason}</td><td style="color:var(--faint)">${fmtTime(a.createdAt)}</td><td><button class="btn ghost sm" onclick="resolveAlert('${a.id}')">Madad 🙏</button></td></tr>`;
+  }).join('');
+}
+function renderBacklinks(){
+  const sel=document.getElementById('b-bot');if(sel.options.length<=1)BOTS.forEach(b=>sel.add(new Option(b.name+' · '+b.role,b.key)));
+  const s=(document.getElementById('b-search').value||'').toLowerCase(),bf=document.getElementById('b-bot').value,sf=document.getElementById('b-status').value;
+  let rows=state.subs.filter(x=>(!bf||x.botType===bf)&&(!sf||x.status===sf)&&(!s||(x.site||'').toLowerCase().includes(s)||clientName(x.clientId).toLowerCase().includes(s)));
+  rows.sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const body=document.getElementById('backlinks-body');
+  if(!rows.length){body.innerHTML=`<tr><td colspan="7">${emptyRow('Abhi koi backlink nahi — jald hi! 🌱')}</td></tr>`;return;}
+  body.innerHTML=rows.map(x=>{const b=BOTS.find(y=>y.key===x.botType)||{badge:'•',name:x.botType,skin:'#ccc'};const url=x.profileUrl||x.submissionUrl||'';
+    return `<tr><td>${clientName(x.clientId)}</td><td><span class="miniava" style="background:${b.skin}44">${b.badge}</span>${b.name}</td><td>${x.site||'—'}</td><td class="linkcell">${url?`<a href="${url}" target="_blank">${url.replace(/^https?:\/\//,'').slice(0,26)}…</a>`:'—'}</td><td><span class="pill ${x.doFollow?'go':'idle'}">${x.doFollow?'doFollow':'noFollow'}</span></td><td><span class="pill ${x.status==='Verified Live'?'go':x.status==='Not Found'?'fail':'run'}">${x.status}</span></td><td style="color:var(--faint)">${fmtTime(x.date)}</td></tr>`;
+  }).join('');
+}
+function renderClients(){
+  const s=(document.getElementById('c-search').value||'').toLowerCase();
+  const rows=state.clients.filter(c=>!s||c.name.toLowerCase().includes(s));
+  const el=document.getElementById('clients');
+  if(!rows.length){el.innerHTML=emptyBox('💼','Abhi koi client nahi','Ek add karo aur squad shuru karo!');return;}
+  el.innerHTML=rows.map((c,i)=>{const links=state.subs.filter(x=>x.clientId===c.id).length;const active=state.tasks.filter(x=>x.clientId===c.id&&(x.status==='Running'||x.status==='Pending')).length;
+    return `<div class="ccard"><div class="ct"><div class="cav" style="background:${cavColors[i%cavColors.length]}">${initials(c.name)}</div><div><div class="cn">${c.name}</div><div class="cu">${(c.website||'').replace(/^https?:\/\//,'')||'—'}</div></div></div><div class="crow"><span class="l">Backlinks built</span><span style="color:var(--go)">${links} 🔗</span></div><div class="crow"><span class="l">Active in queue</span><span>${active}</span></div><div class="crow"><span class="l">Category</span><span style="color:var(--sub)">${c.category||'—'}</span></div><button class="btn" style="width:100%;justify-content:center;margin-top:13px" onclick="alert('Run panel: gopal chuno + tasks bhejo ${c.name.replace(/'/g,'')} ke liye')">▶ Squad ko bhejo!</button></div>`;
+  }).join('');
+}
+function renderSites(){
+  const sel=document.getElementById('s-bot');if(!sel.options.length)BOTS.forEach(b=>sel.add(new Option(b.name+' · '+b.role,b.key)));
+  const bot=sel.value||BOTS[0].key;
+  const seed={directory:[['Brownbook','brownbook.net/signup',52,'—','Live'],['Hotfrog','hotfrog.com/add',48,'OTP','Live']],article:[['EzineArticles','ezinearticles.com/submit',72,'—','Live'],['ArticleBiz','articlebiz.com',44,'—','Live']],rss:[['Feedage','feedage.com/submit',40,'—','Live'],['FeedShark','feedshark.brainbliss.com',38,'—','Live']],pptpdf:[['SlideShare','slideshare.net/upload',95,'Login','Live'],['Issuu','issuu.com/publish',93,'Login','Live']],pressrelease:[['OpenPR','openpr.com/submit',68,'—','Live'],['PRLog','prlog.org',64,'OTP','Live']]};
+  const rows=seed[bot]||[];const body=document.getElementById('sites-body');
+  if(!rows.length){body.innerHTML=`<tr><td colspan="5">${emptyRow('Is gopal ke liye abhi koi jagah nahi added')}</td></tr>`;return;}
+  body.innerHTML=rows.map(r=>`<tr><td style="font-weight:800">${r[0]}</td><td class="linkcell"><a href="https://${r[1]}" target="_blank">${r[1]}</a></td><td>${r[2]}</td><td>${r[3]==='—'?'<span style="color:var(--faint)">none</span>':`<span class="pill warn">${r[3]}</span>`}</td><td><span class="pill go">${r[4]}</span></td></tr>`).join('');
+}
+const emptyBox=(emo,t,d)=>`<div class="empty"><div style="font-size:52px;margin-bottom:6px">${emo}</div><div class="et">${t}</div><div class="ed">${d}</div></div>`;
+const emptyRow=t=>`<div class="empty" style="padding:34px"><div class="et">${t}</div></div>`;
+
+function setView(v){
+  document.querySelectorAll('.navitem').forEach(n=>n.classList.toggle('on',n.dataset.view===v));
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  const T={overview:['Radhe Radhe! 🦚','Aapki Bal Gopal squad aaj kaisा kaam kar rahi hai'],queue:['Task Queue 📋','Squad kis kaam mein lagi hai'],alerts:['Madad Chahiye 🙏','Gopal jinhe haath chahiye'],backlinks:['Backlinks 🔗','Squad ne jo links banaye'],clients:['Clients 💼','Aapke squad ke clients'],sites:['Target Sites 🗺️','Har gopal kahan jaata hai'],settings:['Settings ⚙️','Keys & integrations']};
+  document.getElementById('view-title').textContent=T[v][0];document.getElementById('view-sub').textContent=T[v][1];
+}
+document.querySelectorAll('.navitem').forEach(n=>n.onclick=()=>setView(n.dataset.view));
+function goBot(k){setView('backlinks');document.getElementById('b-bot').value=k;renderBacklinks();}
+function openClient(){document.getElementById('clientModal').classList.add('on');}
+function closeClient(){document.getElementById('clientModal').classList.remove('on');}
+async function saveClient(){
+  const g=id=>document.getElementById(id).value.trim();
+  const p={name:g('f-name'),website:g('f-website'),phone:g('f-phone'),email:g('f-email'),category:g('f-category'),address:g('f-address'),keywords:g('f-keywords'),description:g('f-desc')};
+  if(!p.name){alert('Business name chahiye 🦚');return;}
+  if(LIVE){try{await fetch(API+'/api/clients',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});}catch{}}else state.clients.push({id:'c'+Date.now(),...p});
+  closeClient();['f-name','f-website','f-phone','f-email','f-category','f-address','f-keywords','f-desc'].forEach(i=>document.getElementById(i).value='');pull();
+}
+async function resolveAlert(id){if(LIVE){try{await fetch(API+`/api/alerts/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:'resolved'})});}catch{}}state.alerts=state.alerts.filter(a=>a.id!==id);computeStatus();renderAll();}
+function saveKeys(){alert(LIVE?'Keys safely save ho gayi 💾':'Demo mode — dashboard connect karo keys save karne ke liye 🦚');}
+function setConn(){const d=document.getElementById('conn-dot'),t=document.getElementById('conn-txt');if(LIVE){d.classList.remove('off');t.textContent='Live 🟢';}else{d.classList.add('off');t.textContent='Demo mode 🦚';}}
+function tick(){const d=new Date();document.getElementById('clock').innerHTML=`<b>${d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}</b> · ${d.toLocaleDateString('en-IN',{day:'2-digit',month:'short'})}`;}
+tick();setInterval(tick,30000);pull();setInterval(pull,15000);
+</script>
+</body>
+</html>

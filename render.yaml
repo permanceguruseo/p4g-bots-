@@ -1,0 +1,29 @@
+# render.yaml — one-click deploy for the P4G bot fleet.
+# In Render: New → Blueprint → connect this repo → Apply.
+# Runs the launcher (all bots) as a single Background Worker.
+services:
+  - type: worker
+    name: p4g-bot-fleet
+    runtime: node
+    plan: starter            # $7/mo — stays awake 24/7 (free tier sleeps)
+    buildCommand: npm install && npx puppeteer browsers install chrome
+    startCommand: node launcher.js
+    envVars:
+      - key: API_BASE_URL
+        value: https://p4g-seo-platform.onrender.com
+      - key: API_KEY
+        sync: false          # paste in Render dashboard
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: TWOCAPTCHA_API_KEY
+        sync: false
+      - key: IMAP_HOST
+        sync: false
+      - key: IMAP_USER
+        sync: false
+      - key: IMAP_PASS
+        sync: false
+      - key: HEADLESS
+        value: "true"
+      - key: DAILY_CAP_PER_SITE
+        value: "3"
