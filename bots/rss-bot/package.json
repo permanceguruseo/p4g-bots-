@@ -1,0 +1,17 @@
+{
+  "name": "p4g-bot-template",
+  "version": "1.0.0",
+  "description": "Standalone P4G backlink bot — copy this folder to make a new bot.",
+  "main": "index.js",
+  "scripts": { "start": "node index.js" },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "puppeteer": "^22.12.0"
+  },
+  "optionalDependencies": {
+    "imap-simple": "^5.1.0"
+  }
+}
